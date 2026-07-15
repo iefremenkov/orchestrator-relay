@@ -1,0 +1,78 @@
+#!/usr/bin/env bash
+# Repo-level suite. tests/execution-policy.tsv is the sole execution-mode authority.
+# Every installed tests/*.sh remains required; an unlisted test defaults to candidate-isolated.
+set -uo pipefail
+cd "$(dirname "$0")/.."
+
+manifest=tests/execution-policy.tsv
+fail_policy() { echo "execution policy invalid: $*" >&2; exit 2; }
+[ -f "$manifest" ] && [ ! -L "$manifest" ] || fail_policy "$manifest is missing or not a regular non-symlink file"
+command -v iconv >/dev/null 2>&1 || fail_policy "iconv is required to validate UTF-8"
+iconv -f UTF-8 -t UTF-8 "$manifest" >/dev/null 2>&1 || fail_policy "$manifest is not valid UTF-8"
+
+shopt -s nullglob
+tests=(tests/*.sh)
+[ ${#tests[@]} -gt 0 ] || fail_policy "required test set is empty"
+
+declare -A exists=() mode=() seen=()
+for t in "${tests[@]}"; do
+  [ -f "$t" ] && [ ! -L "$t" ] || fail_policy "required test is not a regular non-symlink file: $t"
+  exists["$t"]=1; mode["$t"]=candidate-isolated
+done
+
+line_no=0
+while IFS= read -r line || [ -n "$line" ]; do
+  line_no=$((line_no + 1))
+  [ -z "$line" ] && continue
+  case "$line" in \#*) continue ;; esac
+  case "$line" in *$'\r'*) fail_policy "line $line_no contains CR/non-normalized text" ;; esac
+  tabs="${line//[^$'\t']/}"
+  [ "${#tabs}" -eq 2 ] || fail_policy "line $line_no must contain exactly three TSV fields"
+  IFS=$'\t' read -r path assigned rationale <<<"$line"
+  [[ "$path" =~ ^tests/[A-Za-z0-9_.-]+\.sh$ ]] || fail_policy "line $line_no has unsafe path '$path'"
+  [ -n "${exists[$path]:-}" ] || fail_policy "line $line_no names nonexistent test '$path'"
+  [ -z "${seen[$path]:-}" ] || fail_policy "line $line_no duplicates '$path'"
+  case "$assigned" in
+    box-precondition|candidate-isolated|candidate-read) ;;
+    *) fail_policy "line $line_no has unknown mode '$assigned'" ;;
+  esac
+  [ -n "${rationale//[[:space:]]/}" ] || fail_policy "line $line_no has an empty rationale"
+  seen["$path"]=1
+  mode["$path"]="$assigned"
+done < "$manifest"
+# No fixed mode counts: the manifest assigns modes; counts are re-measured, not pinned
+# (matches dispatch.py execution_policy and the frozen design).
+
+summary="${ORCH_TEST_SUMMARY:-}"
+strict="${ORCH_TEST_STRICT:-0}"
+failed=0
+skipped=0
+declare -a results=()
+
+for t in "${tests[@]}"; do
+  echo "=== $t (${mode[$t]})"
+  bash "$t"
+  rc=$?
+  case "$rc" in
+    0)  echo "PASS $t"; results+=("PASS $t") ;;
+    77) echo "SKIP $t (did not run)"; results+=("SKIP $t")
+        if [ "${mode[$t]}" = box-precondition ]; then
+          echo "     (box-precondition: visible but tolerated by strict CI)"
+        else
+          skipped=$((skipped + 1))
+        fi ;;
+    *)  echo "FAIL $t (exit $rc)"; results+=("FAIL $t"); failed=1 ;;
+  esac
+done
+
+echo
+echo "--- summary"
+printf '%s\n' "${results[@]}"
+[ -z "$summary" ] || printf '%s\n' "${results[@]}" > "$summary"
+
+if [ "$strict" = 1 ] && [ "$skipped" -gt 0 ]; then
+  echo
+  echo "STRICT: $skipped candidate test(s) did not run; only box-precondition SKIPs are portable."
+  failed=1
+fi
+exit "$failed"
