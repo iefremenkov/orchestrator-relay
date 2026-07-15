@@ -1,0 +1,311 @@
+{
+  "attempt_id": "SPEC-001-1",
+  "spec_id": "SPEC-001",
+  "attempt": 1,
+  "spec_digest": "3fdfa70eb3be07747e8bf13ff915ca5d6c8982f601edda259939e380ffdcec88",
+  "base_sha": "95a53b061fc89a3536430c7c2cee532a58269208",
+  "worker_model": "gpt-5.6-sol",
+  "reviewer_model": "claude-fable-5",
+  "isolation": "D5: codex-worker uid, systemd-hardened, the operator's home inaccessible, test phase network-off",
+  "test_command": "bash tests/slugify.sh",
+  "status": "failed_worker_error",
+  "error_class": "worker_nonzero",
+  "commit_policy": "orchestrator-commits (G1-A/C)",
+  "attestation": {
+    "policy": {
+      "authority": "installed",
+      "manifest_path": "tests/execution-policy.tsv",
+      "manifest_sha256": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+      "required": [
+        "tests/auto_resume_watchdog.sh",
+        "tests/capitalize.sh",
+        "tests/codex_plan.sh",
+        "tests/codex_runtime.sh",
+        "tests/dispatch_base_pin.sh",
+        "tests/dispatch_ci_gate.sh",
+        "tests/dispatch_gate4.sh",
+        "tests/dispatch_parallel.sh",
+        "tests/intake_gate.sh",
+        "tests/isolation_fail_closed.sh",
+        "tests/lower.sh",
+        "tests/plain_language.sh",
+        "tests/prose_cap.sh",
+        "tests/repeat.sh",
+        "tests/reverse.sh",
+        "tests/review_cap.sh",
+        "tests/rulebook_cap.sh",
+        "tests/scope_glob.sh",
+        "tests/slugify.sh",
+        "tests/smoke.sh",
+        "tests/squeeze.sh",
+        "tests/test_attestation.sh",
+        "tests/trim.sh",
+        "tests/upper.sh",
+        "tests/worker_isolation.sh",
+        "tests/worker_userns.sh"
+      ],
+      "modes": {
+        "tests/auto_resume_watchdog.sh": "candidate-isolated",
+        "tests/capitalize.sh": "candidate-isolated",
+        "tests/codex_plan.sh": "candidate-isolated",
+        "tests/codex_runtime.sh": "box-precondition",
+        "tests/dispatch_base_pin.sh": "candidate-isolated",
+        "tests/dispatch_ci_gate.sh": "candidate-isolated",
+        "tests/dispatch_gate4.sh": "candidate-isolated",
+        "tests/dispatch_parallel.sh": "candidate-isolated",
+        "tests/intake_gate.sh": "candidate-isolated",
+        "tests/isolation_fail_closed.sh": "candidate-isolated",
+        "tests/lower.sh": "candidate-isolated",
+        "tests/plain_language.sh": "candidate-read",
+        "tests/prose_cap.sh": "candidate-read",
+        "tests/repeat.sh": "candidate-isolated",
+        "tests/reverse.sh": "candidate-isolated",
+        "tests/review_cap.sh": "candidate-isolated",
+        "tests/rulebook_cap.sh": "candidate-isolated",
+        "tests/scope_glob.sh": "candidate-isolated",
+        "tests/slugify.sh": "candidate-isolated",
+        "tests/smoke.sh": "candidate-isolated",
+        "tests/squeeze.sh": "candidate-isolated",
+        "tests/test_attestation.sh": "candidate-isolated",
+        "tests/trim.sh": "candidate-isolated",
+        "tests/upper.sh": "candidate-isolated",
+        "tests/worker_isolation.sh": "box-precondition",
+        "tests/worker_userns.sh": "box-precondition"
+      },
+      "test_sha256": {
+        "tests/auto_resume_watchdog.sh": "d0e54da131252faffb21fc5969cafa9c70a0a1b8293d7133141d297a8b97d3cc",
+        "tests/capitalize.sh": "a847b120e91a9cad88b2e0ff7c0f06df80cec952b24fba30f29194f688e14a7f",
+        "tests/codex_plan.sh": "0fc87080b8afabf93884226b134bf1296052ca5bbac9af7a5a503e2f3b1ac253",
+        "tests/codex_runtime.sh": "8a165d690520a9545ce48fa56052f516cf434c227bc921cd23aac7b222e48b08",
+        "tests/dispatch_base_pin.sh": "5e7bd25225b419dcdc0dd5155ea566594ca73baa5e8192c2eefbe73d3403f04e",
+        "tests/dispatch_ci_gate.sh": "8db8576ab4ea724c454120789ab62472154d3b765d7a0c3dd9ed74f2f006076a",
+        "tests/dispatch_gate4.sh": "d75a42124cfa1fba7d0f1e9b265e922f656bc4a28b8202f2c83d8e2d1598a838",
+        "tests/dispatch_parallel.sh": "050cf66f20b48b930fa321abd5a47b3101721e49c2487e71338b34580dd6f281",
+        "tests/intake_gate.sh": "09fa7e33c446910512ede540024b2bf7f7d479e1d606a21a430c2593afaebe82",
+        "tests/isolation_fail_closed.sh": "9cf21304600562dc0298a84cb1f5ee8ddae1ad58528c4f50d5e2f1027e89b6e4",
+        "tests/lower.sh": "029ac67c67a94f14bd12df150fdb04e9e816b4a8c603d81f50b93e24e267f63b",
+        "tests/plain_language.sh": "33fd3d1a927f3a68b072894386c5fc147bb2b48cf5321bc9943c40ee672c5bd0",
+        "tests/prose_cap.sh": "d56fc2fefa34390191149bdcb3ed885a50fd9ce45eea9b5e14d2b00d5c7cd3bf",
+        "tests/repeat.sh": "bf2b8021445379673de92fdb20eca050398b3d25c63774df3c5131c5c07ede4f",
+        "tests/reverse.sh": "0726f177c3c592623649cbcf2ae34d18a03b782102b93d342e5f415f50cbdc70",
+        "tests/review_cap.sh": "5399f18d261c64e9d0483f2f5d9e9b254eabe5ad1fe607b37058652cc295c4ec",
+        "tests/rulebook_cap.sh": "3f469a51c4d5e0c4ae68cf14bedb9453a42495128f0fdccbe0864c9fbedca271",
+        "tests/scope_glob.sh": "befe82fd2085553c41a5034eac9d4a3f7973ffbeca8960a2999b0811f3d9b69f",
+        "tests/slugify.sh": "fb701baada6e39e9efefff5d53c8bb4758f964ee943935f1eac7f770b0f755c7",
+        "tests/smoke.sh": "175994681ec1ad54f5c678ccf05aab02b919748f67e22746df17c0e8b6386b95",
+        "tests/squeeze.sh": "fd57a2976c03e1908e43c4b43110f7b7bc1e45802ce7166d35de9c3d4096834e",
+        "tests/test_attestation.sh": "c8ca5e2022c7485a43905135cd852aa811e2e6b4bd83a5f140c619571ff053b8",
+        "tests/trim.sh": "319808e4bedf6fd14a8ee252d62535b9a309ba33eb8d1ebbaf31c1098ceedd3d",
+        "tests/upper.sh": "deede5c967629243da5d94f5a901712e9aeae081157df4dfc7a087cb0bd5698a",
+        "tests/worker_isolation.sh": "c3d3799018ac7d599e0e1f1faa351aed90214326abe695cbc52e63e32a72ffb5",
+        "tests/worker_userns.sh": "c733ed841c27e5d01dc640f4f294a4cb3e769e9b048593a790004496ea6b1336"
+      },
+      "installed_commit": "0c35483ed8043c75a0a67dbeffacc59f9d34947e"
+    },
+    "required": [
+      "tests/auto_resume_watchdog.sh",
+      "tests/capitalize.sh",
+      "tests/codex_plan.sh",
+      "tests/codex_runtime.sh",
+      "tests/dispatch_base_pin.sh",
+      "tests/dispatch_ci_gate.sh",
+      "tests/dispatch_gate4.sh",
+      "tests/dispatch_parallel.sh",
+      "tests/intake_gate.sh",
+      "tests/isolation_fail_closed.sh",
+      "tests/lower.sh",
+      "tests/plain_language.sh",
+      "tests/prose_cap.sh",
+      "tests/repeat.sh",
+      "tests/reverse.sh",
+      "tests/review_cap.sh",
+      "tests/rulebook_cap.sh",
+      "tests/scope_glob.sh",
+      "tests/slugify.sh",
+      "tests/smoke.sh",
+      "tests/squeeze.sh",
+      "tests/test_attestation.sh",
+      "tests/trim.sh",
+      "tests/upper.sh",
+      "tests/worker_isolation.sh",
+      "tests/worker_userns.sh"
+    ],
+    "tests": {
+      "tests/auto_resume_watchdog.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/capitalize.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/codex_plan.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/codex_runtime.sh": {
+        "assigned_phase": "box-precondition",
+        "observations": [
+          {
+            "phase": "box-precondition",
+            "status": "PASS",
+            "subject": "active host and installed isolation boundary",
+            "identity": "dev",
+            "installed_commit": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "installed_commit_after": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "host_id": "8c229378514742bb8bdce5f76b6d2605",
+            "boot_id": "a6fa9dae-c637-4f0e-a537-8f1e9182c8bc",
+            "serialization_lock": "/home/dev/orchestrator-relay/.orchestrator/state/.box-preconditions.lock",
+            "manifest_sha256": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256": "8a165d690520a9545ce48fa56052f516cf434c227bc921cd23aac7b222e48b08",
+            "manifest_sha256_after": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256_after": "8a165d690520a9545ce48fa56052f516cf434c227bc921cd23aac7b222e48b08",
+            "started": "2026-07-15T09:59:21Z",
+            "finished": "2026-07-15T09:59:22Z",
+            "exit_status": 0,
+            "log": "raw/box-precondition-codex_runtime.log",
+            "log_sha256": "709fb5bfa6565b626e9cdfc8ed99c4122110aeb94646c62ef060f7458e57c2e6",
+            "claim": "active installed box boundary passed; candidate test version was not graded"
+          }
+        ]
+      },
+      "tests/dispatch_base_pin.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/dispatch_ci_gate.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/dispatch_gate4.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/dispatch_parallel.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/intake_gate.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/isolation_fail_closed.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/lower.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/plain_language.sh": {
+        "assigned_phase": "candidate-read",
+        "observations": []
+      },
+      "tests/prose_cap.sh": {
+        "assigned_phase": "candidate-read",
+        "observations": []
+      },
+      "tests/repeat.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/reverse.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/review_cap.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/rulebook_cap.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/scope_glob.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/slugify.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/smoke.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/squeeze.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/test_attestation.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/trim.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/upper.sh": {
+        "assigned_phase": "candidate-isolated",
+        "observations": []
+      },
+      "tests/worker_isolation.sh": {
+        "assigned_phase": "box-precondition",
+        "observations": [
+          {
+            "phase": "box-precondition",
+            "status": "PASS",
+            "subject": "active host and installed isolation boundary",
+            "identity": "dev",
+            "installed_commit": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "installed_commit_after": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "host_id": "8c229378514742bb8bdce5f76b6d2605",
+            "boot_id": "a6fa9dae-c637-4f0e-a537-8f1e9182c8bc",
+            "serialization_lock": "/home/dev/orchestrator-relay/.orchestrator/state/.box-preconditions.lock",
+            "manifest_sha256": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256": "c3d3799018ac7d599e0e1f1faa351aed90214326abe695cbc52e63e32a72ffb5",
+            "manifest_sha256_after": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256_after": "c3d3799018ac7d599e0e1f1faa351aed90214326abe695cbc52e63e32a72ffb5",
+            "started": "2026-07-15T09:59:22Z",
+            "finished": "2026-07-15T09:59:23Z",
+            "exit_status": 0,
+            "log": "raw/box-precondition-worker_isolation.log",
+            "log_sha256": "073ac85d3d66770d7cb8bcf2d3b6ce223450e246fe047c648164c9f011e1c948",
+            "claim": "active installed box boundary passed; candidate test version was not graded"
+          }
+        ]
+      },
+      "tests/worker_userns.sh": {
+        "assigned_phase": "box-precondition",
+        "observations": [
+          {
+            "phase": "box-precondition",
+            "status": "PASS",
+            "subject": "active host and installed isolation boundary",
+            "identity": "dev",
+            "installed_commit": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "installed_commit_after": "0c35483ed8043c75a0a67dbeffacc59f9d34947e",
+            "host_id": "8c229378514742bb8bdce5f76b6d2605",
+            "boot_id": "a6fa9dae-c637-4f0e-a537-8f1e9182c8bc",
+            "serialization_lock": "/home/dev/orchestrator-relay/.orchestrator/state/.box-preconditions.lock",
+            "manifest_sha256": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256": "c733ed841c27e5d01dc640f4f294a4cb3e769e9b048593a790004496ea6b1336",
+            "manifest_sha256_after": "13776bdc6d99517b275af6227788e9b91893f217829bfecaee6f127a69416bba",
+            "test_sha256_after": "c733ed841c27e5d01dc640f4f294a4cb3e769e9b048593a790004496ea6b1336",
+            "started": "2026-07-15T09:59:23Z",
+            "finished": "2026-07-15T09:59:23Z",
+            "exit_status": 0,
+            "log": "raw/box-precondition-worker_userns.log",
+            "log_sha256": "3132f11e0c16c9f68810a3dd4c97ef92cbdf4737fc36f22871d5a9a2c6561144",
+            "claim": "active installed box boundary passed; candidate test version was not graded"
+          }
+        ]
+      }
+    },
+    "attested": false,
+    "detail": "required tests did not pass in their assigned phases: tests/auto_resume_watchdog.sh: NO RESULT in assigned phase candidate-isolated; tests/capitalize.sh: NO RESULT in assigned phase candidate-isolated; tests/codex_plan.sh: NO RESULT in assigned phase candidate-isolated; tests/dispatch_base_pin.sh: NO RESULT in assigned phase candidate-isolated; tests/dispatch_ci_gate.sh: NO RESULT in assigned phase candidate-isolated; tests/dispatch_gate4.sh: NO RESULT in assigned phase candidate-isolated; tests/dispatch_parallel.sh: NO RESULT in assigned phase candidate-isolated; tests/intake_gate.sh: NO RESULT in assigned phase candidate-isolated; tests/isolation_fail_closed.sh: NO RESULT in assigned phase candidate-isolated; tests/lower.sh: NO RESULT in assigned phase candidate-isolated; tests/plain_language.sh: NO RESULT in assigned phase candidate-read; tests/prose_cap.sh: NO RESULT in assigned phase candidate-read; tests/repeat.sh: NO RESULT in assigned phase candidate-isolated; tests/reverse.sh: NO RESULT in assigned phase candidate-isolated; tests/review_cap.sh: NO RESULT in assigned phase candidate-isolated; tests/rulebook_cap.sh: NO RESULT in assigned phase candidate-isolated; tests/scope_glob.sh: NO RESULT in assigned phase candidate-isolated; tests/slugify.sh: NO RESULT in assigned phase candidate-isolated; tests/smoke.sh: NO RESULT in assigned phase candidate-isolated; tests/squeeze.sh: NO RESULT in assigned phase candidate-isolated; tests/test_attestation.sh: NO RESULT in assigned phase candidate-isolated; tests/trim.sh: NO RESULT in assigned phase candidate-isolated; tests/upper.sh: NO RESULT in assigned phase candidate-isolated"
+  },
+  "finished": "2026-07-15T09:59:55Z",
+  "worker_exit": 0,
+  "detail": "worker produced no changes"
+}

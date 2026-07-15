@@ -1,0 +1,9 @@
+{
+  "spec_digest": "3fdfa70eb3be07747e8bf13ff915ca5d6c8982f601edda259939e380ffdcec88",
+  "instance_id": "d157e2289dfda084471f77100b45d7f7",
+  "approved_scope": ["scripts/lib/**", "tests/slugify.sh"],
+  "base_branch": "ready-for-main",
+  "approved_by": "iefremenkov",
+  "approved_at": "2026-07-15T00:00:00Z",
+  "note": "Gate 6 first end-to-end dispatch (SPEC-001, Claude->Codex pipeline spike)"
+}

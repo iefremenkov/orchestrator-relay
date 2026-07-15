@@ -1,0 +1,12 @@
+{
+  "approved_scope": [
+    "scripts/lib/**",
+    "tests/acronym.sh"
+  ],
+  "changed": [
+    "scripts/lib/acronym.sh",
+    "tests/acronym.sh"
+  ],
+  "out_of_scope": [],
+  "result": "PASS"
+}
