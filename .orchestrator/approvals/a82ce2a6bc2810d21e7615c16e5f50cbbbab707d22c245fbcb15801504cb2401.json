@@ -1,0 +1,9 @@
+{
+  "spec_digest": "a82ce2a6bc2810d21e7615c16e5f50cbbbab707d22c245fbcb15801504cb2401",
+  "instance_id": "d157e2289dfda084471f77100b45d7f7",
+  "approved_scope": ["scripts/lib/**", "tests/acronym.sh"],
+  "base_branch": "ready-for-main",
+  "approved_by": "iefremenkov",
+  "approved_at": "2026-07-15T00:00:00Z",
+  "note": "Gate 6 first genuine end-to-end dispatch (SPEC-018, acronym helper)"
+}

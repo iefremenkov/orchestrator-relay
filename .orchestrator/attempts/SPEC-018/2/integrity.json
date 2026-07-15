@@ -1,0 +1,9 @@
+{
+  "base_sha": "95a53b061fc89a3536430c7c2cee532a58269208",
+  "worker_commit": "e997b7668fef37fcc4d050b7ff89d532cf0ec8da",
+  "head_equals_worker_commit": true,
+  "descends_from_base": true,
+  "merge_commits": 0,
+  "worktree_clean": true,
+  "result": "PASS"
+}

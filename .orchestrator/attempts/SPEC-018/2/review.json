@@ -1,0 +1,53 @@
+{
+  "verdict": "PASS",
+  "criteria": [
+    {
+      "criterion": "scripts/lib/acronym.sh defines a function acronym that reads its first argument and prints the acronym to stdout.",
+      "result": "MET",
+      "evidence": "Diff scripts/lib/acronym.sh:3-15: `acronym() { local value=${1-}; ... printf '%s\\n' \"$result\" | LC_ALL=C tr 'a-z' 'A-Z'; }` \u2014 reads $1 (default-safe) and prints the result to stdout."
+    },
+    {
+      "criterion": "Behaviour: split on whitespace; take the first character of each word; uppercase it; concatenate with no separator.",
+      "result": "MET",
+      "evidence": "Diff scripts/lib/acronym.sh:9-14: `IFS=$' \\t\\n' read -r -d '' -a words < <(printf '%s\\0' \"$value\")` splits on space/tab/newline; loop appends `${word:0:1}` with no separator; `tr 'a-z' 'A-Z'` uppercases."
+    },
+    {
+      "criterion": "tests/acronym.sh sources the helper and asserts: 'as soon as possible' -> 'ASAP'; 'hello world' -> 'HW'; '' -> ''.",
+      "result": "MET",
+      "evidence": "Diff tests/acronym.sh:5 `source scripts/lib/acronym.sh`; lines 20-22: `assert_acronym 'as soon as possible' 'ASAP'`, `assert_acronym 'hello world' 'HW'`, `assert_acronym '' ''`."
+    },
+    {
+      "criterion": "tests/acronym.sh exits 0 when all assertions pass.",
+      "result": "MET",
+      "evidence": "Diff tests/acronym.sh:2 `set -euo pipefail` plus assert_acronym returning 1 on mismatch means any failure aborts non-zero; when all three assertions pass the script falls through to the end and exits 0. Static trace: acronym '' yields '' via $(...) newline stripping, 'as soon as possible' yields ASAP, 'hello world' yields HW. Note: tests/acronym.sh is not in the attested 26-test manifest (installed policy predates this spec), so this is verified from the diff, not from an execution record."
+    }
+  ],
+  "scope_finding": "Only two files changed, both new: scripts/lib/acronym.sh (matches in_scope scripts/lib/**) and tests/acronym.sh (explicitly in_scope). No touches to out_of_scope paths (.github/**, scripts/test, specs/**, .orchestrator/**). Orchestrator scope check: PASS. No drift observed.",
+  "regression_finding": "No existing files are modified, so no existing behavior can regress. All 26 required regression tests passed with phase-aware provenance against candidate e997b766; the tests/codex_runtime.sh candidate-isolated FAIL (exit 1) and the worker_isolation/worker_userns SKIPs (exit 77) are graded by their box-precondition PASS observations per the recorded policy claims, not by the isolated runs. Minor non-blocking note: expanding the empty words array under the test's `set -u` requires bash >= 4.4; acceptable for this bash-based suite.",
+  "security_findings": "None observed. No secrets or credentials introduced; no network access (needs_network: false is respected); shell code quotes all expansions (`\"$value\"`, `\"${words[@]}\"`), uses `read -r` to avoid backslash mangling, and pins `LC_ALL=C` for tr. The test cd's only within the repo and executes no untrusted input.",
+  "reasons": [
+    "All four acceptance criteria are MET with direct diff evidence: the helper implements whitespace-split/first-char/uppercase/concatenate semantics and the test pins exactly the three specified cases under set -euo pipefail.",
+    "Changed paths are exactly the two in-scope new files; orchestrator integrity and scope checks both PASS.",
+    "Attested phase-aware test evidence shows all 26 required regression tests passing against the exact candidate commit; the codex_runtime/worker_isolation/worker_userns isolated-phase non-PASS entries are covered by their box-precondition PASS observations per policy.",
+    "Caveat recorded but non-blocking: tests/acronym.sh itself is absent from the installed attestation manifest, so criterion 4 was verified by static analysis of the committed test script rather than an execution record; the script's structure makes exit-0-on-success unambiguous.",
+    "No security findings: no secrets, no network use, defensive quoting throughout."
+  ],
+  "spec_digest": "a82ce2a6bc2810d21e7615c16e5f50cbbbab707d22c245fbcb15801504cb2401",
+  "base_sha": "95a53b061fc89a3536430c7c2cee532a58269208",
+  "worker_commit": "e997b7668fef37fcc4d050b7ff89d532cf0ec8da",
+  "schema_version": "3",
+  "quality": {
+    "maintainability": {
+      "score": 4,
+      "evidence": "scripts/lib/acronym.sh is 15 lines, all-local state (`local value/word/result/words`), handles unset $1 via ${1-}, and uses a standard NUL-delimited read idiom; the test's assert_acronym helper prints expected-vs-actual with %q on failure, making breakage easy to diagnose."
+    },
+    "design_fit": {
+      "score": 4,
+      "evidence": "Follows the repo's established helper-plus-pinning-test layout (scripts/lib/<name>.sh with a matching tests/<name>.sh, as with tests/upper.sh, tests/lower.sh, tests/capitalize.sh in the manifest); test follows the suite conventions of `set -euo pipefail` and `cd \"$(dirname \"$0\")/..\"` and sourcing the helper directly."
+    },
+    "test_quality": {
+      "score": 3,
+      "evidence": "tests/acronym.sh:20-22 covers the core multi-word case, a two-word case, and the empty-string boundary with exact-match assertions that fail loudly; it does not probe additional boundaries such as tabs, repeated whitespace, or single-word input beyond the spec-pinned cases."
+    }
+  }
+}
