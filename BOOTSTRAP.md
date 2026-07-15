@@ -69,3 +69,4 @@ safety invariants first.
 - **Never** put a minute-scale timeout on a Codex consultation — run it detached; it can take a while.
 - `.orchestrator/HALT` is the kill switch: `touch` it to block all launches.
 - The full operating rules are in `CLAUDE.md`; conventions in `AGENTS.md`.
+# CI check Wed Jul 15 09:40:44 AM UTC 2026
